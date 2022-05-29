@@ -13,7 +13,7 @@ const { Post } = require('./model/postSchema.js');
 
 app.listen(port, () => {
 	mongoose
-		.connect('mongodb+srv://aaa:!abcd1234@cluster0.shsbo8p.mongodb.net/?retryWrites=true&w=majority')
+		.connect('mongodb+srv://aaa:!abcd1234@cluster0.shsbo8p.mongodb.net/dcodelab?retryWrites=true&w=majority')
 		.then(() => {
 			console.log('Server listening on port:' + port);
 			console.log('mongoDB success');
