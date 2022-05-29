@@ -15,6 +15,11 @@ function App() {
 			.post('/api/create', item)
 			.then((res) => {
 				console.log(res);
+				if (res.data.success) {
+					alert('데이터 저장에 성공했습니다.');
+				} else {
+					alert('데이터 저장에 실패했습니다');
+				}
 			})
 			.catch((err) => {
 				console.log(err);
