@@ -78,3 +78,18 @@ app.post('/api/read', (req, res) => {
 			res.status(400).json({ success: false });
 		});
 });
+
+//상세페이지 데이터 요청
+app.post('/api/detail', (req, res) => {
+	//body-parser로 넘어온 글번호는 문자열이기 때문에
+	//숫자로 형변환한 다음 doc검색
+	Post.findOne({ communityNum: Number(req.body.num) })
+		.exec()
+		.then((doc) => {
+			res.status(200).json({ success: true, detail: doc });
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(400).json({ success: false });
+		});
+});
