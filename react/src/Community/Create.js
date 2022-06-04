@@ -15,7 +15,7 @@ function Create() {
 		};
 
 		axios
-			.post('/api/create', item)
+			.post('/api/community/create', item)
 			.then((res) => {
 				console.log(res);
 				if (res.data.success) {

@@ -18,7 +18,7 @@ function Deatil() {
 		};
 
 		axios
-			.post('/api/detail', body)
+			.post('/api/community/detail', body)
 			.then((res) => {
 				if (res.data.success) {
 					console.log(res.data.detail);
