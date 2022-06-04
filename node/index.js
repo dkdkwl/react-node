@@ -10,8 +10,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//Post모델 불러옴
+//모델 불러옴
 const { Post } = require('./model/postSchema.js');
+const { Counter } = require('./model/counterSchema.js');
 
 app.listen(port, () => {
 	mongoose
@@ -34,16 +35,28 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/create', (req, res) => {
-	console.log(req.body);
+	//리액트에서 가져온 데이터에 Counter모델로부터 communityNum값을 찾아서 추가
+	//이때 findOne메서드로 찾을 조건을 설정
+	Counter.findOne({ name: 'counter' })
+		.exec()
+		.then((doc) => {
+			//기존 클라이언트에서 받은 데이터에 카운터모델의 communityNum값을 추가 적용
+			const PostModel = new Post({
+				title: req.body.title,
+				content: req.body.content,
+				communityNum: doc.communityNum,
+			});
 
-	const PostModel = new Post({
-		title: req.body.title,
-		content: req.body.content,
-	});
-
-	PostModel.save()
-		.then(() => {
-			res.status(200).json({ success: true });
+			//위에서 communityNum이 추가된 모델을 DB에 저장
+			PostModel.save().then(() => {
+				//성공적으로 데이터 저장이 완료되면 카운터 모델을 다시 불러와서 기존 communityNum값을 1씩 증가
+				Counter.updateOne(
+					{ name: 'counter' },
+					{ $inc: { communityNum: 1 } }
+				).then(() => {
+					res.status(200).json({ success: true });
+				});
+			});
 		})
 		.catch((err) => {
 			console.log(err);
