@@ -4,7 +4,9 @@ const app = express();
 const mongoose = require('mongoose');
 const port = 5000;
 
-app.use(express.static(path.join(__dirname, '../react/build')));
+app.use(
+	express.static(path.join(__dirname, '../react/build'))
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -13,7 +15,9 @@ const { Post } = require('./model/postSchema.js');
 
 app.listen(port, () => {
 	mongoose
-		.connect('mongodb+srv://aaa:!abcd1234@cluster0.shsbo8p.mongodb.net/dcodelab?retryWrites=true&w=majority')
+		.connect(
+			'mongodb+srv://aaa:!abcd1234@cluster0.shsbo8p.mongodb.net/dcodelab?retryWrites=true&w=majority'
+		)
 		.then(() => {
 			console.log('Server listening on port:' + port);
 			console.log('mongoDB success');
@@ -24,7 +28,9 @@ app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, '../react/build/index.html'));
+	res.sendFile(
+		path.join(__dirname, '../react/build/index.html')
+	);
 });
 
 app.post('/api/create', (req, res) => {
@@ -39,6 +45,21 @@ app.post('/api/create', (req, res) => {
 		.then(() => {
 			res.status(200).json({ success: true });
 		})
+		.catch((err) => {
+			console.log(err);
+			res.status(400).json({ success: false });
+		});
+});
+
+//게시글 요청
+app.post('/api/read', (req, res) => {
+	Post.find()
+		.exec()
+		.then((doc) =>
+			res
+				.status(200)
+				.json({ success: true, communityList: doc })
+		)
 		.catch((err) => {
 			console.log(err);
 			res.status(400).json({ success: false });
