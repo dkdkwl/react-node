@@ -10,6 +10,12 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//전용 라우터 호출
+app.use(
+	'/api/community',
+	require('./router/communityRouter.js')
+);
+
 app.listen(port, () => {
 	mongoose
 		.connect(
@@ -23,12 +29,6 @@ app.listen(port, () => {
 			console.log(err);
 		});
 });
-
-//전용 라우터 호출
-app.use(
-	'/api/community',
-	require('./router/communityRouter.js')
-);
 
 app.get('/', (req, res) => {
 	res.sendFile(
