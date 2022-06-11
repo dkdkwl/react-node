@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../Common/Layout';
+import styled from 'styled-components';
 
 function Create() {
 	const navigate = useNavigate();
