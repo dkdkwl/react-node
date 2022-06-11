@@ -8,7 +8,7 @@ const HeaderWrapper = styled.header`
 	background: #222;
 	top: 0px;
 	left: 0%;
-	padding: 50px;
+	padding: 70px 50px;
 
 	h1 {
 		margin-bottom: 40px;
