@@ -48,6 +48,7 @@ function Create() {
 			<br />
 			<textarea
 				id='con'
+				rows='7'
 				value={con}
 				onChange={(e) => setCon(e.target.value)}></textarea>
 			<br />

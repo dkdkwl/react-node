@@ -15,6 +15,33 @@ const Main = styled.main`
 			color: #444;
 			margin-bottom: 30px;
 		}
+
+		section {
+			label {
+				font: 16px/1 'arial';
+				color: #555;
+				margin-bottom: 10px;
+				display: block;
+			}
+			input[type='text'],
+			textarea {
+				width: 50%;
+				min-width: 300px;
+				padding: 5px 8px;
+				border: 1px so lid #999;
+				margin-bottom: 20px;
+				resize: none;
+				display: block;
+			}
+			button {
+				display: inline-block;
+				padding: 5px 20px;
+				background: #555;
+				color: #fff;
+				cursor: pointer;
+				border: none;
+			}
+		}
 	}
 `;
 
