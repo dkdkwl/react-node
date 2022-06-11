@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Layout from '../Common/Layout';
@@ -30,6 +30,10 @@ function Deatil() {
 			});
 	}, []);
 
+	useEffect(() => {
+		console.log(Detail);
+	}, [Detail]);
+
 	const DetailView = styled.div`
 		width: 100%;
 		background: #fff;
@@ -40,10 +44,19 @@ function Deatil() {
 		<Layout name={'Detail'}>
 			{/* Detail값이 비어있지 않을때 화면 출력 */}
 			{Detail && (
-				<DetailView>
-					<h2>{Detail.title}</h2>
-					<p>{Detail.content}</p>
-				</DetailView>
+				<>
+					<DetailView>
+						<h2>{Detail.title}</h2>
+						<p>{Detail.content}</p>
+					</DetailView>
+
+					<ul className='btns'>
+						<li>
+							<Link to={`/edit/${Detail.communityNum}`}>Edit</Link>
+						</li>
+						<li>Delete</li>
+					</ul>
+				</>
 			)}
 		</Layout>
 	);

@@ -6,6 +6,7 @@ import Main from './Main';
 import List from './Community/List';
 import Create from './Community/Create';
 import Detail from './Community/Detail';
+import Edit from './Community/Edit';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				<Route path='/list' element={<List />} />
 				<Route path='/create' element={<Create />} />
 				<Route path='/detail/:num' element={<Detail />} />
+				<Route path='/edit/:num' element={<Edit />} />
 			</Routes>
 		</>
 	);
