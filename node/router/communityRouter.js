@@ -62,5 +62,25 @@ router.post('/detail', (req, res) => {
 });
 
 //글 수정 요청
+router.post('/edit', (req, res) => {
+	const temp = {
+		title: req.body.title,
+		content: req.body.content,
+	};
+
+	//수정 방식
+	//$inc: 숫자형 자료를 1씩 증가
+	//$dec: 숫자형 자료를 1씩 감소
+	//$set: 기존 값을 전혀 다른값으로 세팅
+	Post.updateOne({ communityNum: Number(req.body.num) }, { $set: temp })
+		.exec()
+		.then(() => {
+			res.status(200).json({ success: true });
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(400).json({ success: false });
+		});
+});
 
 module.exports = router;

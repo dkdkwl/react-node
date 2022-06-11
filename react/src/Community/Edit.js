@@ -23,8 +23,12 @@ function Edit() {
 			num: params.num,
 		};
 
-		axios.post('/api/communitye/edit', body).then((res) => {
+		axios.post('/api/community/edit', body).then((res) => {
 			if (res.data.success) {
+				alert('글수정이 완료되었습니다.');
+				navigate(`/detail/${params.num}`);
+			} else {
+				alert('글수정에 실패했습니다.');
 			}
 		});
 	};
