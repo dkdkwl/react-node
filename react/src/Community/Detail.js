@@ -7,7 +7,6 @@ function Deatil() {
 	//라우터 파라미터로 전달된 값 받음
 	//미션 - params로 받은 글 번호로 상세 글 화면 출력 (52분까지)
 	const params = useParams();
-	console.log(params);
 
 	const [Detail, setDetail] = useState(null);
 

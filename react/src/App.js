@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import GlobalStyles from './Styles/GlobalStyles';
 
 import Header from './Common/Header';
 import Main from './Main';
@@ -9,6 +10,7 @@ import Detail from './Community/Detail';
 function App() {
 	return (
 		<>
+			<GlobalStyles />
 			<Header />
 			<Routes>
 				<Route path='/' element={<Main />} />
