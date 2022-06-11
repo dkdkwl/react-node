@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Layout from '../Common/Layout';
@@ -6,10 +6,28 @@ import styled from 'styled-components';
 
 function Deatil() {
 	//라우터 파라미터로 전달된 값 받음
-	//미션 - params로 받은 글 번호로 상세 글 화면 출력 (52분까지)
 	const params = useParams();
-
+	const navigate = useNavigate();
 	const [Detail, setDetail] = useState(null);
+
+	const onDelete = () => {
+		if (!window.confirm('정말 삭제하겠습니까')) return;
+		const body = {
+			num: params.num,
+		};
+
+		axios
+			.post('/api/community/delete', body)
+			.then((res) => {
+				if (res.data.success) {
+					alert('게시글이 삭제 되었습니다.');
+					navigate('/list');
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
 	useEffect(() => {
 		//params의 글번호를 post요청시 같이 전달
@@ -54,7 +72,7 @@ function Deatil() {
 						<li>
 							<Link to={`/edit/${Detail.communityNum}`}>Edit</Link>
 						</li>
-						<li>Delete</li>
+						<li onClick={onDelete}>Delete</li>
 					</ul>
 				</>
 			)}

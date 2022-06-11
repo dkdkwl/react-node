@@ -83,4 +83,18 @@ router.post('/edit', (req, res) => {
 		});
 });
 
+//글 삭제 요청
+router.post('/delete', (req, res) => {
+	console.log(req.body.num);
+	Post.deleteOne({ communityNum: Number(req.body.num) })
+		.exec()
+		.then(() => {
+			res.status(200).json({ success: true });
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(400).json({ success: false });
+		});
+});
+
 module.exports = router;
