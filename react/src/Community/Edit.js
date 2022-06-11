@@ -11,7 +11,26 @@ function Edit() {
 	const [Title, setTitle] = useState('');
 	const [Content, setContent] = useState('');
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		console.log(params);
+		const body = { num: params.num };
+		axios
+			.post('/api/community/detail', body)
+			.then((res) => {
+				if (res.data.success) {
+					console.log(res.data.detail);
+					setDetail(res.data.detail);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+
+	useEffect(() => {
+		setTitle(Detail.title);
+		setContent(Detail.content);
+	}, [Detail]);
 
 	return (
 		<Layout name={'Edit Post'}>
@@ -20,7 +39,7 @@ function Edit() {
 			<input
 				type='text'
 				id='title'
-				value={Title}
+				value={Title || ''}
 				onChange={(e) => {
 					setTitle(e.target.value);
 				}}
@@ -30,9 +49,10 @@ function Edit() {
 			<label htmlFor='content'>Content</label>
 			<br />
 			<textarea
+				rows='8'
 				id='content'
 				type='text'
-				value={Content}
+				value={Content || ''}
 				onChange={(e) => {
 					setContent(e.target.value);
 				}}></textarea>
