@@ -39,11 +39,7 @@ router.post('/create', (req, res) => {
 router.post('/read', (req, res) => {
 	Post.find()
 		.exec()
-		.then((doc) =>
-			res
-				.status(200)
-				.json({ success: true, communityList: doc })
-		)
+		.then((doc) => res.status(200).json({ success: true, communityList: doc }))
 		.catch((err) => {
 			console.log(err);
 			res.status(400).json({ success: false });
@@ -64,5 +60,7 @@ router.post('/detail', (req, res) => {
 			res.status(400).json({ success: false });
 		});
 });
+
+//글 수정 요청
 
 module.exports = router;
