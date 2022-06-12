@@ -47,6 +47,15 @@ function Header() {
 					<NavLink to='/create'>Write Post</NavLink>
 				</li>
 			</Gnb>
+
+			<ul className='util'>
+				<li>
+					<NavLink to='/login'>Login</NavLink>
+				</li>
+				<li>
+					<NavLink to='/join'>Join</NavLink>
+				</li>
+			</ul>
 		</HeaderWrapper>
 	);
 }
