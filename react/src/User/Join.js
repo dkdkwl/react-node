@@ -19,11 +19,19 @@ function Join() {
 			return alert('두개의 비밀번호를 동일하게 입력하세요');
 		}
 
-		//위의 조건을 통화해서 회원가입을 하기 위한 정보값을 변수에 할당
+		//위의 조건을 통과해서 회원가입을 하기 위한 정보값을 변수에 할당
 		//이때 await문으로 firebase를 통해서 인증 완료후  다음 코드가 동작되도록 동기처리
 		let createdUser = await firebase
 			.auth()
 			.createUserWithEmailAndPassword(Email, Pw1);
+
+		//반환된 user정보값에 displayName이라는 키값으로 사용자이름 추가 등록
+		await createdUser.user.updateProfile({
+			displayName: Name,
+		});
+
+		//위의 유저정보가 firebase를 통해서 성공적으로 전돨되면 동기적으로 해당 정보값 콘솔로 출력
+		console.log(createdUser.user);
 	};
 
 	return (
