@@ -21,6 +21,12 @@ function App() {
 		//auth상태 변화를 감지해서 인수로 해당 상태값을 전달
 		firebase.auth().onAuthStateChanged((userInfo) => {
 			console.log('userInfo', userInfo);
+
+			if (userInfo !== null) {
+				dispatch(loginUser(userInfo.multiFactor.user));
+			} else {
+				dispatch(logoutUser());
+			}
 		});
 	}, []);
 
