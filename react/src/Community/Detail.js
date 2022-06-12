@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Layout from '../Common/Layout';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 function Deatil() {
 	//라우터 파라미터로 전달된 값 받음
 	const params = useParams();
 	const navigate = useNavigate();
 	const [Detail, setDetail] = useState(null);
+	const user = useSelector((store) => store.user);
 
 	const onDelete = () => {
 		if (!window.confirm('정말 삭제하겠습니까')) return;
@@ -68,12 +70,14 @@ function Deatil() {
 						<p>{Detail.content}</p>
 					</DetailView>
 
-					<ul className='btns'>
-						<li>
-							<Link to={`/edit/${Detail.communityNum}`}>Edit</Link>
-						</li>
-						<li onClick={onDelete}>Delete</li>
-					</ul>
+					{user.accessToken !== '' && (
+						<ul className='btns'>
+							<li>
+								<Link to={`/edit/${Detail.communityNum}`}>Edit</Link>
+							</li>
+							<li onClick={onDelete}>Delete</li>
+						</ul>
+					)}
 				</>
 			)}
 		</Layout>

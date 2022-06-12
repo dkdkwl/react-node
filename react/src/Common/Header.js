@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import firebase from '../firebase';
 
 const HeaderWrapper = styled.header`
 	width: 350px;
@@ -66,7 +67,7 @@ function Header() {
 				)}
 			</Gnb>
 
-			{user.accessToken === '' && (
+			{user.accessToken === '' ? (
 				<Util>
 					<li>
 						<NavLink to='/login'>Login</NavLink>
@@ -75,6 +76,13 @@ function Header() {
 						<NavLink to='/join'>Join</NavLink>
 					</li>
 				</Util>
+			) : (
+				<li
+					onClick={() => {
+						firebase.auth().signOut();
+					}}>
+					Logout
+				</li>
 			)}
 		</HeaderWrapper>
 	);
