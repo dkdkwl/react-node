@@ -1,7 +1,7 @@
 //redux toolkit에서 제공하는 createSlice를 이용하면 reducer의 action, payload값을 편하게 전달가능
 import { createSlice } from '@reduxjs/toolkit';
 
-export default userSlice = createSlice({
+export const userSlice = createSlice({
 	name: 'user',
 	initialState: {
 		displayName: '',
@@ -27,4 +27,6 @@ export default userSlice = createSlice({
 	},
 });
 
-//export default userSlice.reducer;
+//crateSlice메서드로 생성한 2개의 loginUser, logoutUser액션생성 함수를 내보냄
+export const { loginUser, logoutUser } = userSlice.actions;
+export default userSlice.reducer;

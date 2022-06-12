@@ -10,7 +10,24 @@ import Edit from './Community/Edit';
 import Login from './User/Login';
 import Join from './User/Join';
 
+import firebase from './firebase';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser, logoutUser } from './redux/userSlice';
+
 function App() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		//auth상태 변화를 감지해서 인수로 해당 상태값을 전달
+		firebase.auth().onAuthStateChanged((userInfo) => {
+			console.log('userInfo', userInfo);
+		});
+	}, []);
+
+	useEffect(() => {
+		//firebase.auth().signOut();
+	}, []);
+
 	return (
 		<>
 			<GlobalStyles />
