@@ -32,6 +32,18 @@ const Gnb = styled.ul`
 	}
 `;
 
+const Util = styled.ul`
+	position: absolute;
+	bottom: 10vh;
+	left: 50px;
+	display: flex;
+
+	li a {
+		padding: 5px 10px;
+		color: #999;
+	}
+`;
+
 function Header() {
 	return (
 		<HeaderWrapper>
@@ -48,14 +60,14 @@ function Header() {
 				</li>
 			</Gnb>
 
-			<ul className='util'>
+			<Util>
 				<li>
 					<NavLink to='/login'>Login</NavLink>
 				</li>
 				<li>
 					<NavLink to='/join'>Join</NavLink>
 				</li>
-			</ul>
+			</Util>
 		</HeaderWrapper>
 	);
 }
