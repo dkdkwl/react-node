@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const HeaderWrapper = styled.header`
 	width: 350px;
@@ -45,6 +46,9 @@ const Util = styled.ul`
 `;
 
 function Header() {
+	const user = useSelector((store) => store.user);
+	console.log(user);
+
 	return (
 		<HeaderWrapper>
 			<h1>
@@ -55,19 +59,23 @@ function Header() {
 				<li>
 					<NavLink to='/list'>Show List</NavLink>
 				</li>
-				<li>
-					<NavLink to='/create'>Write Post</NavLink>
-				</li>
+				{user.accessToken !== '' && (
+					<li>
+						<NavLink to='/create'>Write Post</NavLink>
+					</li>
+				)}
 			</Gnb>
 
-			<Util>
-				<li>
-					<NavLink to='/login'>Login</NavLink>
-				</li>
-				<li>
-					<NavLink to='/join'>Join</NavLink>
-				</li>
-			</Util>
+			{user.accessToken === '' && (
+				<Util>
+					<li>
+						<NavLink to='/login'>Login</NavLink>
+					</li>
+					<li>
+						<NavLink to='/join'>Join</NavLink>
+					</li>
+				</Util>
+			)}
 		</HeaderWrapper>
 	);
 }

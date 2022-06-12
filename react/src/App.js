@@ -31,7 +31,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		//firebase.auth().signOut();
+		firebase.auth().signOut();
 	}, []);
 
 	return (
